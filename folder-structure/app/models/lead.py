@@ -1,0 +1,1 @@
+﻿"""Lead model placeholder."""\n

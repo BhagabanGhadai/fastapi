@@ -1,0 +1,1 @@
+﻿"""Property repository placeholder."""\n

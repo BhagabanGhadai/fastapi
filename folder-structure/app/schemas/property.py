@@ -1,0 +1,1 @@
+﻿"""Property schemas."""\n
