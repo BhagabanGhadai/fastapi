@@ -1,1 +1,0 @@
-﻿"""Event publishers placeholder."""\n

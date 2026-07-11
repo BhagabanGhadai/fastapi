@@ -1,1 +1,0 @@
-﻿"""Event consumers placeholder."""\n

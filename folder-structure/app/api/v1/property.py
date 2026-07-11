@@ -1,1 +1,0 @@
-﻿"""Property endpoints."""\n

@@ -1,1 +1,0 @@
-﻿"""Lead repository placeholder."""\n

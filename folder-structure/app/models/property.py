@@ -1,1 +1,0 @@
-﻿"""Property model placeholder."""\n
