@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 import uvicorn
-from core.settings import settings
+from core import settings
 from db import Base, engine
-from models import user
+from api import api_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -13,10 +13,7 @@ app:FastAPI = FastAPI(
     title="FastAPI Social Media API",
 )
 
-@app.get("/")
-async def index():
-    
-    return dict(message="Welcome to fastapi-social-media-api")
+app.include_router(api_router, prefix="/api/v1")
 
 if __name__ == "__main__":
     uvicorn.run(app, port=int(settings.PORT), reload=False)

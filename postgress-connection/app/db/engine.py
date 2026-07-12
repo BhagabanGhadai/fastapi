@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 
-from core.settings import settings
+from core import settings
 
 
 engine = create_engine(
