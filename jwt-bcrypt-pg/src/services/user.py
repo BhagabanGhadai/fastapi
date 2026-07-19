@@ -18,6 +18,17 @@ class UserService:
         except Exception as e:
             raise e
 
+    def login(self,user_data:dict)->User:
+        try:
+            user= self.repository.get_by_username(user_data["username"])
+            if user is None:
+                raise ValueError("User not found")
+            if not self.helper.verify_password(user_data["password"],user.password):
+                raise ValueError("Invalid password")
+            return user
+        except Exception as e:
+            raise e    
+
     def get_user_by_username(self,username:str)->User:
         try:
             user= self.repository.get_by_username(username)

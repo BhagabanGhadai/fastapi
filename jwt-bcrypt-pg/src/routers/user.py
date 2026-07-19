@@ -12,7 +12,19 @@ user_router=APIRouter(
 
 @user_router.post("/",response_model=UserBaseResponse,status_code=status.HTTP_201_CREATED)
 async def create_user(user_data:UserBaseRequest, db:Session =Depends(get_db)):
-    user_service=UserService(db)
-    new_user=user_service.create_user(user_data.model_dump())
-    return new_user
+    try:
+        user_service=UserService(db)
+        new_user=user_service.create_user(user_data.model_dump())
+        return new_user
+    except ValueError as e:
+        return {"message":str(e)}
 
+
+@user_router.post("login",response_model=UserBaseResponse,status_code=status.HTTP_200_OK)
+async def login(user_data:UserBaseRequest, db:Session =Depends(get_db)):
+    try:
+        user_service=UserService(db)
+        new_user=user_service.create_user(user_data.model_dump())
+        return new_user
+    except ValueError as e:
+        return {"message":str(e)}
