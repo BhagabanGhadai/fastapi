@@ -1,17 +1,19 @@
 from repositories.user import UserRepository
 from models.user import User
 from sqlalchemy.orm import Session
+from utils.helper import Helper
 
 class UserService:
     def __init__(self,db:Session):
         self.repository=UserRepository(db)
+        self.helper=Helper()
 
     def create_user(self,user_data:dict)->User:
         try:
             user_exist = self.repository.get_by_username(user_data["username"])
             if user_exist is not None:
                 raise ValueError("User already exists")
-
+            user_data["password"]=self.helper.hash_password(user_data["password"])
             return self.repository.create_user(user_data)
         except Exception as e:
             raise e
