@@ -13,6 +13,12 @@ class Helper:
         password_hash=PasswordHash.recommended()
         return password_hash.verify(password,hashed_password)
 
+    def build_jwt_payload(self,user_id:int,type:TokenType=TokenType.ACCESS)->dict:
+        return {
+            "sub":user_id,
+            "token_type":type.value
+        }
+
     def generate_jwt_token(self,payload:dict,type:TokenType=TokenType.ACCESS)->str:
         to_encode=payload.copy()
         if type==TokenType.ACCESS:
