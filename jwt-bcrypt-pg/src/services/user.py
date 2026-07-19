@@ -1,3 +1,5 @@
+from schemas.user import TokenResponse
+from utils import TokenType
 from repositories.user import UserRepository
 from models.user import User
 from sqlalchemy.orm import Session
@@ -18,14 +20,18 @@ class UserService:
         except Exception as e:
             raise e
 
-    def login(self,user_data:dict)->User:
+    def login(self,user_data:dict)->TokenResponse:
         try:
             user= self.repository.get_by_username(user_data["username"])
             if user is None:
                 raise ValueError("User not found")
             if not self.helper.verify_password(user_data["password"],user.password):
                 raise ValueError("Invalid password")
-            return user
+
+            access_token=self.helper.generate_jwt_token(self.helper.build_jwt_payload(user.id,TokenType.ACCESS))
+            refresh_token=self.helper.generate_jwt_token(self.helper.build_jwt_payload(user.id,TokenType.REFRESH))
+
+            return TokenResponse(access_token=access_token,refresh_token=refresh_token,user_id=user.id)
         except Exception as e:
             raise e    
 

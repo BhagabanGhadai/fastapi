@@ -22,7 +22,7 @@ class TokenPayload(BaseModel):
 class TokenResponse(BaseModel):
     access_token:str
     refresh_token:str
-    token_type:str
+    user_id:int
 
     class Config:
         from_attributes = True
