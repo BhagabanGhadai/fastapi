@@ -14,5 +14,10 @@ class Settings(BaseSettings):
     
     PORT: int
     DB_CONNECTION_STRING: str
+    ACCESS_TOKEN_SECRET: str
+    REFRESH_TOKEN_SECRET: str
+    ACCESS_TOKEN_EXPIRY_IN_MIN: int
+    REFRESH_TOKEN_EXPIRY_IN_MIN: int
+    ALGORITHM: str
 
 settings = Settings()
