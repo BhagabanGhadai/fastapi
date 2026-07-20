@@ -10,7 +10,7 @@ user_router=APIRouter(
     tags=["user"]
 )
 
-@user_router.post("/",response_model=UserBaseResponse,status_code=status.HTTP_201_CREATED)
+@user_router.post("/register",response_model=UserBaseResponse,status_code=status.HTTP_201_CREATED)
 async def create_user(user_data:UserBaseRequest, db:Session =Depends(get_db)):
     try:
         user_service=UserService(db)
@@ -20,7 +20,7 @@ async def create_user(user_data:UserBaseRequest, db:Session =Depends(get_db)):
         return {"message":str(e)}
 
 
-@user_router.post("login",response_model=UserBaseResponse,status_code=status.HTTP_200_OK)
+@user_router.post("/login",response_model=UserBaseResponse,status_code=status.HTTP_200_OK)
 async def login(user_data:UserBaseRequest, db:Session =Depends(get_db)):
     try:
         user_service=UserService(db)
